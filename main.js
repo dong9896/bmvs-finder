@@ -5,6 +5,8 @@ const delay = ms => new Promise(res => setTimeout(res, ms));
 
 const debug = process.env.DEBUG?.toLowerCase().trim() == 'true';
 
+const { Webhook } = require('simple-discord-webhooks');
+
 (async () => {
   const browser = await puppeteer.launch({
     args: ['--no-sandbox', '--disable-setuid-sandbox'],
@@ -83,6 +85,18 @@ const debug = process.env.DEBUG?.toLowerCase().trim() == 'true';
   });
 
   console.log("Available appointment data:\n", appointmentData);
+
+  // Send the webhook
+  const webhook = new Webhook('DISCORD_WEBHOOK_URL_HERE');
+
+  // Build the string
+  var messageArr = [];
+  for (const [key, value] of Object.entries(appointmentData)) {
+    messageArr.push(`${key}: ${value}`);
+  }
+
+  console.log("Sending webhook");
+  await webhook.send(`BVMS Appointments:\n\`\`\`${messageArr.join("\n")}\`\`\``);
 
   await page.screenshot({ path: 'screenshot.png' });
 
