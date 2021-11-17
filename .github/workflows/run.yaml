@@ -25,4 +25,4 @@ jobs:
           cache: npm
 
       - name: Run script
-        run: node main.js
+        run: npm start

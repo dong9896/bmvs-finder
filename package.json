@@ -4,6 +4,7 @@
   "description": "Finds appointments in BMVS (Bupa Medical Visa Services): https://bmvs.onlineappointmentscheduling.net.au/oasis/",
   "main": "main.js",
   "scripts": {
+    "start": "node main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
