@@ -96,7 +96,7 @@ const { Webhook } = require('simple-discord-webhooks');
   }
 
   console.log("Sending webhook");
-  await webhook.send(`BVMS Appointments:\n\`\`\`${messageArr.join("\n")}\`\`\``);
+  await webhook.send(`<@168004824628068352> BVMS Appointments:\n\`\`\`${messageArr.join("\n")}\`\`\``);
 
   await page.screenshot({ path: 'screenshot.png' });
 
