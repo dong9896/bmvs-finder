@@ -1,0 +1,26 @@
+on:
+  push:
+    branches:
+      - "*"
+  schedule:
+    - cron: '2  * * * *'
+    - cron: '58 * * * *'
+
+jobs:
+  run:
+    name: "Run script"
+    runs-on: ubuntu-20.04
+    container:
+      image: "buildkite/puppeteer"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          cache: npm
+
+      - name: Run script
+        run: node main.js
