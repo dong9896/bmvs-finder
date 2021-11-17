@@ -95,8 +95,20 @@ const { Webhook } = require('simple-discord-webhooks');
     messageArr.push(`${key}: ${value}`);
   }
 
+  var webhookFields = [];
+  for (const [key, value] of Object.entries(appointmentData)) {
+    let date = new Date(Date.parse(key));
+    // let dateString = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
+    webhookFields.push({ name: date.toDateString(), value: value, inline: false });
+  }
+
   console.log("Sending webhook");
-  await webhook.send(`<@168004824628068352> BVMS Appointments:\n\`\`\`${messageArr.join("\n")}\`\`\``);
+  // await webhook.send(`<@168004824628068352> BVMS Appointments:\n\`\`\`${messageArr.join("\n")}\`\`\``);
+  await webhook.send("<@168004824628068352>", [
+    {
+      fields: webhookFields,
+    }
+  ]);
 
   await page.screenshot({ path: 'screenshot.png' });
 
