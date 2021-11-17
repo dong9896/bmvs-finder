@@ -8,7 +8,24 @@ const debug = process.env.DEBUG?.toLowerCase().trim() == 'true';
 var githubRefName = process.env.GITHUB_REF_NAME;
 var githubJobId = process.env.GITHUB_JOB;
 
+const locationName = process.env.LOCATION_NAME;
+const locationInputId = process.env.LOCATION_INPUT_ID;
+
 const { Webhook } = require('simple-discord-webhooks');
+
+var exitWithError = false;
+if (!locationName) {
+  console.error("LOCATION_NAME not set");
+  exitWithError = true;
+}
+if (!locationInputId) {
+  console.error("LOCATION_INPUT_ID not set");
+  exitWithError = true;
+}
+
+if (exitWithError) {
+  process.exit(1);
+}
 
 (async () => {
   const browser = await puppeteer.launch({
@@ -58,15 +75,15 @@ const { Webhook } = require('simple-discord-webhooks');
     await dialog.dismiss();
   });
 
-  await page.evaluate(async () => {
-    console.log("Selecting Melbourne location");
-    document.querySelector("input#rbLocation135").click();
+  await page.evaluate(async (locationName, locationInputId) => {
+    console.log(`Selecting location: ${locationName}`);
+    document.querySelector(`input#${locationInputId}`).click();
 
     console.log("Submitting form...");
     let submitBtn = document.querySelector("button#ContentPlaceHolder1_btnCont");
     submitBtn.disabled = false;
     submitBtn.click();
-  });
+  }, locationName, locationInputId);
 
   await page.waitForNavigation();
 
@@ -113,8 +130,9 @@ const { Webhook } = require('simple-discord-webhooks');
 
   console.log("Sending webhook");
   // await webhook.send(`<@168004824628068352> BVMS Appointments:\n\`\`\`${messageArr.join("\n")}\`\`\``);
-  await webhook.send("<@168004824628068352>", [
+  await webhook.send(`<@168004824628068352>`, [
     {
+      title: `Appointments available at Bupa ${locationName}`,
       fields: webhookFields,
       footer: webhookFooter,
     }

@@ -4,5 +4,7 @@ docker run \
 --tty \
 --volume "${PWD}:${PWD}" \
 --workdir "${PWD}" \
+--env LOCATION_NAME \
+--env LOCATION_INPUT_ID \
 buildkite/puppeteer \
 main.js
