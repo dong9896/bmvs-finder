@@ -6,6 +6,8 @@ on:
     # 6AM (7PM UTC)
     - cron: '2  19 * * *'
 
+name: Scrape Data
+
 jobs:
   run:
     name: "Run script"
