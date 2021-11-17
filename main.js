@@ -1,7 +1,10 @@
 const puppeteer = require('puppeteer');
 const path = require('path');
+import 'process';
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
+
+const debug = process.env.DEBUG?.toLowerCase().trim() == 'true';
 
 (async () => {
   const browser = await puppeteer.launch({
@@ -13,7 +16,9 @@ const delay = ms => new Promise(res => setTimeout(res, ms));
     executablePath: path.resolve("/usr/bin/google-chrome"),
   });
   const page = await browser.newPage();
-  page.on('console', consoleObj => console.log(consoleObj.text()));
+  if (debug == true) {
+    page.on('console', consoleObj => console.log(consoleObj.text()));
+  }
   page.setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36");
 
   await page.goto("https://bmvs.onlineappointmentscheduling.net.au/oasis/", {
