@@ -10,6 +10,7 @@ var githubJobId = process.env.GITHUB_JOB;
 
 const locationName = process.env.LOCATION_NAME;
 const locationInputId = process.env.LOCATION_INPUT_ID;
+const maxRows = parseInt(process.env.MAX_ROWS) || 3;
 
 const { Webhook } = require('simple-discord-webhooks');
 
@@ -120,6 +121,11 @@ if (exitWithError) {
     let date = new Date(Date.parse(key));
     // let dateString = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
     webhookFields.push({ name: date.toDateString(), value: value, inline: false });
+
+    // Break out of this loop if webhookFields is equal to or greater than maxRows.
+    if (webhookFields.length >= maxRows) {
+      break;
+    }
   }
 
   webhookFooter = {};

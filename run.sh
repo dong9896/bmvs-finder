@@ -6,5 +6,6 @@ docker run \
 --workdir "${PWD}" \
 --env LOCATION_NAME \
 --env LOCATION_INPUT_ID \
+--env MAX_ROWS \
 buildkite/puppeteer \
 main.js
