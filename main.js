@@ -5,6 +5,9 @@ const delay = ms => new Promise(res => setTimeout(res, ms));
 
 const debug = process.env.DEBUG?.toLowerCase().trim() == 'true';
 
+var githubRefName = process.env.GITHUB_REF_NAME;
+var githubJobId = process.env.GITHUB_JOB;
+
 const { Webhook } = require('simple-discord-webhooks');
 
 (async () => {
@@ -102,11 +105,18 @@ const { Webhook } = require('simple-discord-webhooks');
     webhookFields.push({ name: date.toDateString(), value: value, inline: false });
   }
 
+  webhookFooter = {};
+  if (githubRefName) {
+    webhookFooter.text = `via GitHub ref ${githubRefName}`;
+    webhookFooter.url = `https://github.com/zerocube/jkueh-bmvs-finder/runs/${githubJobId}`;
+  }
+
   console.log("Sending webhook");
   // await webhook.send(`<@168004824628068352> BVMS Appointments:\n\`\`\`${messageArr.join("\n")}\`\`\``);
   await webhook.send("<@168004824628068352>", [
     {
       fields: webhookFields,
+      footer: webhookFooter,
     }
   ]);
 
