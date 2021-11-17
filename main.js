@@ -1,6 +1,5 @@
 const puppeteer = require('puppeteer');
 const path = require('path');
-import 'process';
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
