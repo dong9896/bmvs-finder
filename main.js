@@ -145,7 +145,7 @@ var appointmentData = await page.evaluate(async () => {
     webhookFooter.text = `via GitHub ref ${githubRefName}`;
     webhookFooter.url = `https://github.com/zerocube/jkueh-bmvs-finder/runs/${githubJobId}`;
   }
-  if (appointmentData[0] !== '' || appointmentData[0] === '6 Jan' || appointmentData[0] === '7 Jan' 
+  if (appointmentData[0] === '6 Jan' || appointmentData[0] === '7 Jan' 
     || appointmentData[0] === '8 Jan' || appointmentData[0] === '9 Jan' || appointmentData[0] === '10 Jan' || appointmentData[0] === '11 Jan') {
     console.log("appointmentData[0]");
     console.log("Sending webhook");
