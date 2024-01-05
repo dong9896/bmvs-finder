@@ -102,8 +102,14 @@ if (exitWithError) {
 
   // Get data
   var appointmentData = await page.evaluate(async () => {
-    return document.querySelector("#divPaginationNavigation > button");
-    //return gAvailSlotText;
+    const buttonElement = document.querySelector("#divPaginationNavigation > button");
+      
+      if (buttonElement) {
+        return buttonElement.textContent.trim();
+      } else {
+        // Handle the case where the button element is not found
+        return null;
+      }
   });
 
   console.log("Available appointment data:\n", appointmentData);
