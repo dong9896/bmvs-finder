@@ -146,6 +146,8 @@ var appointmentData = await page.evaluate(async () => {
   }
   if (appointmentData) {
     console.log(Object.entries(appointmentData));
+    console.log(webhookFields);
+    console.log(webhookFooter);
     console.log("Sending webhook");
     // await webhook.send(`<@168004824628068352> BVMS Appointments:\n\`\`\`${messageArr.join("\n")}\`\`\``);
     await webhook.send(`<@168004824628068352>`, [
