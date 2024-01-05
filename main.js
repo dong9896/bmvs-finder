@@ -102,7 +102,7 @@ if (exitWithError) {
 
   // Get data
   var appointmentData = await page.evaluate(async () => {
-    return 'here';
+    return document.querySelector("#divPaginationNavigation > button");
     //return gAvailSlotText;
   });
 
