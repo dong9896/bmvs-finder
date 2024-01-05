@@ -1,7 +1,7 @@
 on:
-  # push:
-  #   branches:
-  #     - "*"
+  push:
+    branches:
+      - "*"
   schedule:
     # 6AM (7PM UTC)
     - cron: '* * * * *'
