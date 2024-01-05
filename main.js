@@ -145,7 +145,7 @@ var appointmentData = await page.evaluate(async () => {
     webhookFooter.url = `https://github.com/zerocube/jkueh-bmvs-finder/runs/${githubJobId}`;
   }
   if (appointmentData) {
-    console.log(Object.entries(appointmentData));
+    console.log(appointmentData);
     console.log(webhookFields);
     console.log(webhookFooter);
     console.log("Sending webhook");
