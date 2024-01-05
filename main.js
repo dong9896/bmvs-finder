@@ -144,10 +144,7 @@ var appointmentData = await page.evaluate(async () => {
     webhookFooter.text = `via GitHub ref ${githubRefName}`;
     webhookFooter.url = `https://github.com/zerocube/jkueh-bmvs-finder/runs/${githubJobId}`;
   }
-  if (appointmentData) {
-    console.log(appointmentData);
-    console.log(webhookFields);
-    console.log(webhookFooter);
+  if (appointmentData.length !== 0) {
     console.log("Sending webhook");
     // await webhook.send(`<@168004824628068352> BVMS Appointments:\n\`\`\`${messageArr.join("\n")}\`\`\``);
     await webhook.send(`<@168004824628068352>`, [
@@ -157,7 +154,10 @@ var appointmentData = await page.evaluate(async () => {
         footer: webhookFooter,
       } 
   ]);
+  } else {
+     console.log("No webhook");
   }
+
   await page.screenshot({ path: 'screenshot.png' });
 
   await browser.close();
