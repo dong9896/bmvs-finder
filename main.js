@@ -61,9 +61,9 @@ if (exitWithError) {
 
   await page.evaluate(async () => {
     console.log("Setting postcode");
-    document.querySelector("input[name='ctl00$ContentPlaceHolder1$SelectLocation1$txtSuburb']").value = 3000;
+    document.querySelector("input[name='ctl00$ContentPlaceHolder1$SelectLocation1$txtSuburb']").value = 2000;
     console.log("Setting state");
-    document.querySelector("select[name='ctl00$ContentPlaceHolder1$SelectLocation1$ddlState']").value = "VIC"
+    document.querySelector("select[name='ctl00$ContentPlaceHolder1$SelectLocation1$ddlState']").value = "NSW"
     console.log("Submitting location form");
     document.querySelector("input[type=submit]").click();
   });
@@ -94,6 +94,8 @@ if (exitWithError) {
     document.querySelector("input#chkClass1_489").click();
     console.log("Selecting 'Chest X-Ray (502)'");
     document.querySelector("input#chkClass1_492").click();
+    console.log("Selecting 'Serum Creatinine and eGFR (705)'");
+    document.querySelector("input#chkClass1_1266").click();
     console.log("Submitting form...");
     document.querySelector("button#ContentPlaceHolder1_btnCont").click();
   });
@@ -125,7 +127,6 @@ var appointmentData = await page.evaluate(async () => {
   for (const [key, value] of Object.entries(appointmentData)) {
     messageArr.push(`${key}: ${value}`);
   }
-
   var webhookFields = [];
   for (const [key, value] of Object.entries(appointmentData)) {
     let date = new Date(Date.parse(key));
@@ -143,14 +144,15 @@ var appointmentData = await page.evaluate(async () => {
     webhookFooter.text = `via GitHub ref ${githubRefName}`;
     webhookFooter.url = `https://github.com/zerocube/jkueh-bmvs-finder/runs/${githubJobId}`;
   }
-
-  console.log("Sending webhook");
-  // await webhook.send(`<@168004824628068352> BVMS Appointments:\n\`\`\`${messageArr.join("\n")}\`\`\``);
-  await webhook.send(`<@168004824628068352>`, [
-    {
-      title: `Appointments available at Bupa ${locationName}`,
-      fields: webhookFields,
-      footer: webhookFooter,
+  if (dataList && dataList.length > 0) {
+    console.log("Sending webhook");
+    // await webhook.send(`<@168004824628068352> BVMS Appointments:\n\`\`\`${messageArr.join("\n")}\`\`\``);
+    await webhook.send(`<@168004824628068352>`, [
+      {
+        title: `Appointments available at Bupa ${locationName}`,
+        fields: webhookFields,
+        footer: webhookFooter,
+      }
     }
   ]);
 
