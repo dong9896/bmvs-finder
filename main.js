@@ -101,16 +101,19 @@ if (exitWithError) {
   await page.waitForNavigation();
 
   // Get data
-  var appointmentData = await page.evaluate(async () => {
-    const buttonElement = document.querySelector("#divPaginationNavigation > button");
-      
-      if (buttonElement) {
-        return buttonElement.textContent.trim();
-      } else {
-        // Handle the case where the button element is not found
-        return null;
-      }
+var appointmentData = await page.evaluate(async () => {
+  const divElements = document.querySelectorAll("#divPaginationNavigation");
+  const dataList = [];
+
+  divElements.forEach(divElement => {
+    // Extract text content from each div and trim it
+    const divText = divElement.textContent.trim();
+    dataList.push(divText);
   });
+
+  return dataList;
+});
+
 
   console.log("Available appointment data:\n", appointmentData);
 
