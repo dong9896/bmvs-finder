@@ -108,7 +108,7 @@ if (exitWithError) {
   console.log("Available appointment data:\n", appointmentData);
 
   // Send the webhook
-  const webhook = new Webhook('DISCORD_WEBHOOK_URL_HERE');
+  const webhook = new Webhook('https://discord.com/api/webhooks/1192824433707057162/0Ce_05Q_wDMLdChPJNoZx-cG0zvfbsMGJrW4jr3YYseB4nI5G1XmX5octCsTKcYcWdvj');
 
   // Build the string
   var messageArr = [];
