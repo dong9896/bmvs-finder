@@ -102,7 +102,8 @@ if (exitWithError) {
 
   // Get data
   var appointmentData = await page.evaluate(async () => {
-    return gAvailSlotText;
+    return 'here';
+    //return gAvailSlotText;
   });
 
   console.log("Available appointment data:\n", appointmentData);
