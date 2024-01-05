@@ -154,9 +154,9 @@ var appointmentData = await page.evaluate(async () => {
         footer: webhookFooter,
       } 
   ]);
+  }
   await page.screenshot({ path: 'screenshot.png' });
 
   await browser.close();
-  }
   console.log("All done!");
 })();
