@@ -4,7 +4,7 @@ on:
       - "*"
   schedule:
     # 6AM (7PM UTC)
-    - cron: '2  19 * * *'
+    - cron: '* * * * *'
   workflow_dispatch: {}
 
 name: Scrape Data
@@ -28,14 +28,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Check Melbourne CBD
+      - name: Check SYDNEY
         run: npm start
         env:
-          LOCATION_NAME: Melbourne CBD
-          LOCATION_INPUT_ID: rbLocation135
-          # Bupa
-          # Level 2, 717 Bourke Street
-          # Docklands
+          LOCATION_NAME: Sydney
+          LOCATION_INPUT_ID: rbLocation168
 
       # - name: Check Greensborough
       #   run: npm start
