@@ -152,12 +152,11 @@ var appointmentData = await page.evaluate(async () => {
         title: `Appointments available at Bupa ${locationName}`,
         fields: webhookFields,
         footer: webhookFooter,
-      }
-    }
+      } 
   ]);
-
   await page.screenshot({ path: 'screenshot.png' });
 
   await browser.close();
+  }
   console.log("All done!");
 })();
