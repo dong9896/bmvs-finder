@@ -5,7 +5,7 @@ on:
   schedule:
     # 6AM (7PM UTC)
     - cron: '* * * * *'
-  # workflow_dispatch: {}
+  workflow_dispatch: {}
 
 name: Scrape Data
 
