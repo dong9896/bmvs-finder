@@ -37,11 +37,11 @@ jobs:
           # Level 2, 717 Bourke Street
           # Docklands
 
-      - name: Check Greensborough
-        run: npm start
-        env:
-          LOCATION_NAME: Greensborough
-          LOCATION_INPUT_ID: rbLocation84
-          # Greensborough Medical Centre
-          # 9-13 Flintoff Street
-          # Greensborough
+      # - name: Check Greensborough
+      #   run: npm start
+      #   env:
+      #     LOCATION_NAME: Greensborough
+      #     LOCATION_INPUT_ID: rbLocation84
+      #     # Greensborough Medical Centre
+      #     # 9-13 Flintoff Street
+      #     # Greensborough
